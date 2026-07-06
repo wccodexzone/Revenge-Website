@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REVENGE STARTED</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#050816,#111827,#1e293b);
+overflow:hidden;
+}
+
+body::before{
+content:"";
+position:absolute;
+width:600px;
+height:600px;
+background:rgba(0,255,255,.08);
+border-radius:50%;
+filter:blur(120px);
+top:-200px;
+left:-150px;
+}
+
+body::after{
+content:"";
+position:absolute;
+width:500px;
+height:500px;
+background:rgba(255,215,0,.08);
+border-radius:50%;
+filter:blur(120px);
+bottom:-180px;
+right:-100px;
+}
+
+.container{
+position:relative;
+z-index:2;
+width:90%;
+max-width:650px;
+padding:45px;
+border-radius:25px;
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,.15);
+box-shadow:0 20px 50px rgba(0,0,0,.5);
+text-align:center;
+}
+
+h1{
+font-size:50px;
+font-weight:900;
+color:#fff;
+letter-spacing:3px;
+margin-bottom:30px;
+text-shadow:0 0 20px cyan;
+}
+
+.timer{
+font-size:36px;
+font-weight:bold;
+color:#00f7ff;
+margin-bottom:35px;
+line-height:1.6;
+}
+
+button{
+padding:16px 42px;
+font-size:18px;
+font-weight:bold;
+border:none;
+border-radius:50px;
+cursor:pointer;
+background:linear-gradient(90deg,#00d2ff,#3a7bd5);
+color:white;
+transition:.3s;
+box-shadow:0 0 25px rgba(0,210,255,.4);
+}
+
+button:hover{
+transform:scale(1.05);
+box-shadow:0 0 35px rgba(0,210,255,.8);
+}
+
+#msg{
+margin-top:20px;
+font-size:18px;
+color:#ffd54f;
+font-weight:bold;
+}
+
+a{
+text-decoration:none;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>REVENGE STARTED</h1>
+
+<div class="timer" id="timer">
+Loading...
+</div>
+
+<a id="link" href="YOUR_LINK_HERE" target="_blank">
+<button id="btn">OPEN LINK</button>
+</a>
+
+<div id="msg"></div>
+
+</div>
+
+<script>
+
+// ===============================
+// Change only this after countdown
+// ===============================
+const unlockLink = "YOUR_LINK_HERE";
+
+// Countdown End:
+// 6 August 12:00 AM
+const endDate = new Date("2026-08-06T00:00:00").getTime();
+
+const timer = document.getElementById("timer");
+const btn = document.getElementById("btn");
+const msg = document.getElementById("msg");
+const link = document.getElementById("link");
+
+link.href = unlockLink;
+
+function updateTimer(){
+
+const now = new Date().getTime();
+
+const distance = endDate - now;
+
+if(distance <= 0){
+
+timer.innerHTML="🎉 LINK UNLOCKED";
+
+btn.innerHTML="OPEN LINK";
+
+btn.onclick=null;
+
+msg.innerHTML="";
+
+return;
+
+}
+
+const days=Math.floor(distance/(1000*60*60*24));
+const hours=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+const minutes=Math.floor((distance%(1000*60*60))/(1000*60));
+const seconds=Math.floor((distance%(1000*60))/1000);
+
+timer.innerHTML=
+days+" Days<br>"+
+hours+" Hours "+
+minutes+" Minutes "+
+seconds+" Seconds";
+
+}
+
+setInterval(updateTimer,1000);
+
+updateTimer();
+
+btn.addEventListener("click",function(e){
+
+const now=new Date().getTime();
+
+if(now<endDate){
+
+e.preventDefault();
+
+msg.innerHTML="🔒 Link locked. When this timer is over, then the link is unlocked.";
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
